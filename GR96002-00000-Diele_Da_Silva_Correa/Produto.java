@@ -1,10 +1,20 @@
 public class Produto {
     private String nome;
     private double preco;
+    private Data data;
 
-    public Produto(String nome, double preco) {
+    public Produto(String nome, double preco, Data data) {
         this.nome = nome;
         this.preco = preco;
+        this.data = data;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
     }
 
     public String getNome() {
