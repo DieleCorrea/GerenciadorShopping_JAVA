@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Produto {
     private String nome;
     private double preco;
@@ -35,8 +37,12 @@ public class Produto {
                 '}';
     }
  //VALIDAÇÕES
-    public boolean estaVencido(Data dataProduto){
-        if(dataProduto. > Data)
-        return true;
+    public boolean estaVencido(Data dataProduto) {
+        LocalDate vencimento = LocalDate.of(dataProduto.getAno(), dataProduto.getMes(), dataProduto.getDia());
+        if (vencimento.isBefore(LocalDate.now())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
