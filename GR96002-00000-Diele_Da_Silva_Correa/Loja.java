@@ -53,14 +53,14 @@ public class Loja
 
     @Override
     public String toString() {
-        return "Loja{" +
-                "nome='" + nome + '\'' +
-                ", quantidadeFuncionarios=" + quantidadeFuncionarios +
-                ", salarioBaseFuncionario=" + salarioBaseFuncionario +
-                '}';
-    }
+        return  " \n- Nome: " + nome +
+                " \n- Quantida de funcionarios: " + quantidadeFuncionarios +
+                " \n- Salário base funcionario: " + salarioBaseFuncionario +
+                " \n- Data criação: " + dataFormacao +
+                " \n- Endereco: " + endereco;
 
-//METODOS DOS EXERCICIO
+    }
+    //METODOS DOS EXERCICIO
 
     public double gastosComSalario(){
         if(salarioBaseFuncionario != -1){

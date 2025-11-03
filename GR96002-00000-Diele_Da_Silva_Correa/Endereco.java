@@ -19,15 +19,14 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return "Endereco{" +
-                "nomeDaRua='" + nomeDaRua + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", estado='" + estado + '\'' +
-                ", pais='" + pais + '\'' +
-                ", cep='" + cep + '\'' +
-                ", numero='" + numero + '\'' +
-                ", complemento='" + complemento + '\'' +
-                '}';
+        return
+                "\n   Nome da rua: " + nomeDaRua +
+                "\n   Cidade: " + cidade +
+                "\n   Estado: " + estado +
+                "\n   Pais: " + pais +
+                "\n   Cep: " + cep +
+                "\n   Numero: " + numero +
+                "\n   Complemento: " + complemento ;
     }
 
     public String getNomeDaRua() {

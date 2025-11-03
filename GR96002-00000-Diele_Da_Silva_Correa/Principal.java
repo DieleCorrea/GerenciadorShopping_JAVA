@@ -32,24 +32,33 @@ public class Principal {
                 default:
                     System.out.println("Opção inválida!\n");
             }
-
+            if(lojaCriada != null && produtoCriado != null){
+                Data dataTeste = new Data(20,10,2023);
+                if (produtoCriado.estaVencido(dataTeste)){
+                    System.out.println("PRODUTO VENCIDO");
+                }else{
+                    System.out.println("PRODUTO NÃO VENCIDO");
+                }
+                System.out.println("Informações da loja criada: " + lojaCriada.toString() + "\n");
+            }
         } while (opt != 3);
     }
 
     private static void criarLoja() {
         scanner.nextLine();
-        System.out.println("Nome da loja\n");
+        System.out.print("Nome da loja: ");
         String nomeLoja = scanner.nextLine();
 
-        System.out.println("Quantidade de funcionários:\n");
+        System.out.print("Quantidade de funcionários: ");
         int qtdFunc = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.println("Salário base dos funcionarios:\n");
+        System.out.print("Salário base dos funcionarios: ");
         double slrBase = scanner.nextDouble();
 
-        //System.out.println("Endereço:\n");
-        //scanner.nextLine();
+        scanner.nextLine();
+        System.out.println("\n--- Endereço da loja ---");
+        Endereco endereco = criarEnderecoLoja();
 
         LocalDate hoje = LocalDate.now();
         int dia = hoje.getDayOfMonth();
@@ -57,42 +66,55 @@ public class Principal {
         int ano = hoje.getYear();
         Data dataFormacao = new Data(dia, mes, ano);
 
-        lojaCriada = new Loja(nomeLoja, qtdFunc, slrBase, null, dataFormacao);
+        lojaCriada = new Loja(nomeLoja, qtdFunc, slrBase, endereco, dataFormacao);
         System.out.println("loja criada com sucesso!\n");
-        mostraMenu();
     }
 
     private static void criarProduto(){
         scanner.nextLine();
-        System.out.println("Nome do produto\n");
+        System.out.print("Nome do produto: ");
         String nomeProduto = scanner.nextLine();
 
-        System.out.println("Preço do produto:\n");
+        System.out.print("Preço do produto: ");
         double precoProduto = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.println("Validade (dd/mm/aaaa):\n");
+        System.out.print("Validade (dd/mm/aaaa): ");
         String validade = scanner.nextLine();
         String[] partes = validade.split("/");
         int dia = Integer.parseInt(partes[0]);
         int mes = Integer.parseInt(partes[1]);
         int ano = Integer.parseInt(partes[2]);
+
         Data dataValidade = new Data(dia, mes, ano);
-
-//        Produto produto = new Produto(nomeProduto, precoProduto,dataValidade);
-//        produto.estaVencido(dataValidade);
         produtoCriado = new Produto(nomeProduto, precoProduto,dataValidade);
-
-        if (produtoCriado.estaVencido(dataValidade)){
-            System.out.println("PRODUTO VENCIDO");
-        }else{
-            System.out.println("PRODUTO NÃO VENCIDO");
-        }
-
         System.out.println("Produto criado com sucesso!\n");
-        mostraMenu();
     }
 
+    private static Endereco criarEnderecoLoja(){
+        System.out.print("Nome da rua: ");
+        String rua = scanner.nextLine();
+
+        System.out.print("Número: ");
+        String numero = scanner.nextLine();
+
+        System.out.print("Complemento: ");
+        String complemento = scanner.nextLine();
+
+        System.out.print("Cidade: ");
+        String cidade = scanner.nextLine();
+
+        System.out.print("Estado: ");
+        String estado = scanner.nextLine();
+
+        System.out.print("País: ");
+        String pais = scanner.nextLine();
+
+        System.out.print("CEP: ");
+        String cep = scanner.nextLine();
+
+        return  new Endereco(rua, cidade, estado, pais, cep, numero, complemento);
+    }
 
 }
 
