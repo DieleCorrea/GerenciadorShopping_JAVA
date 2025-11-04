@@ -11,7 +11,7 @@ public class Vestuario extends Loja{
         this.produtosImportados = produtosImportados;
     }
 
-    public boolean isProdutosImportados() {
+    public boolean getProdutosImportados() {
         return produtosImportados;
     }
 
