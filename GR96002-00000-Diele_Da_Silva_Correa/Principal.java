@@ -54,7 +54,7 @@ public class Principal {
         scanner.nextLine();
 
         System.out.print("Salário base dos funcionarios: ");
-        double slrBase = scanner.nextDouble();
+        int slrBase = scanner.nextInt();
 
         scanner.nextLine();
         System.out.println("\n--- Endereço da loja ---");

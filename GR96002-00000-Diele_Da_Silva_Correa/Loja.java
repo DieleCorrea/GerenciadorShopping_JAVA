@@ -2,16 +2,16 @@ public class Loja
 {
     private String nome;
     private int quantidadeFuncionarios;
-    private double salarioBaseFuncionario;
+    private int salarioBaseFuncionario;
     private Endereco endereco;
-    private Data dataFormacao;
+    private Data dataFundacao;
 
-   public Loja(String nome, int quantidadeFuncionarios, double salarioBaseFuncionario, Endereco endereco, Data dataFormacao) {
+   public Loja(String nome, int quantidadeFuncionarios, int salarioBaseFuncionario, Endereco endereco, Data dataFundacao) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = salarioBaseFuncionario;
         this.endereco = endereco;
-        this.dataFormacao = dataFormacao;
+        this.dataFundacao = dataFundacao;
     }
     public Loja(String nome, int quantidadeFuncionarios){
         this.nome = nome;
@@ -26,7 +26,7 @@ public class Loja
     public int getQuantidadeFuncionarios() {
         return quantidadeFuncionarios;
     }
-    public double getSalarioBaseFuncionario() {
+    public int getSalarioBaseFuncionario() {
         return salarioBaseFuncionario;
     }
     public void setNome(String nome) {
@@ -35,14 +35,14 @@ public class Loja
     public void setQuantidadeFuncionarios(int quantidadeFuncionarios) {
         this.quantidadeFuncionarios = quantidadeFuncionarios;
     }
-    public void setSalarioBaseFuncionario(double salarioBaseFuncionario) {
+    public void setSalarioBaseFuncionario(int salarioBaseFuncionario) {
         this.salarioBaseFuncionario = salarioBaseFuncionario;
     }
-    public Data getDataFormacao() {
-        return dataFormacao;
+    public Data getDataFundacao() {
+        return dataFundacao;
     }
-    public void setDataFormacao(Data dataFormacao) {
-        this.dataFormacao = dataFormacao;
+    public void setDataFundacao(Data dataFundacao) {
+        this.dataFundacao = dataFundacao;
     }
     public Endereco getEndereco() {
         return endereco;
@@ -56,13 +56,13 @@ public class Loja
         return  " \n- Nome: " + nome +
                 " \n- Quantida de funcionarios: " + quantidadeFuncionarios +
                 " \n- Salário base funcionario: " + salarioBaseFuncionario +
-                " \n- Data criação: " + dataFormacao +
+                " \n- Data criação: " + dataFundacao +
                 " \n- Endereco: " + endereco;
 
     }
     //METODOS DOS EXERCICIO
 
-    public double gastosComSalario(){
+    public int gastosComSalario(){
         if(salarioBaseFuncionario != -1){
             return  quantidadeFuncionarios * salarioBaseFuncionario;
         }else{

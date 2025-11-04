@@ -3,19 +3,19 @@ import java.time.LocalDate;
 public class Produto {
     private String nome;
     private double preco;
-    private Data data;
+    private Data dataValidade;
 
-    public Produto(String nome, double preco, Data data) {
+    public Produto(String nome, double preco, Data dataValidade) {
         this.nome = nome;
         this.preco = preco;
-        this.data = data;
+        this.dataValidade = dataValidade;
     }
 
-    public Data getData() {
-        return data;
+    public Data getDataValidade() {
+        return dataValidade;
     }
-    public void setData(Data data) {
-        this.data = data;
+    public void setDataValidade(Data dataValidade) {
+        this.dataValidade = dataValidade;
     }
     public String getNome() {
         return nome;
@@ -29,18 +29,20 @@ public class Produto {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+
     @Override
     public String toString() {
         return "Produto{" +
                 "nome='" + nome + '\'' +
                 ", preco=" + preco +
+                ", data=" + dataValidade +
                 '}';
     }
 
- public boolean estaVencido(Data dataReferencia) {
-     LocalDate validade = LocalDate.of(this.data.getAno(),
-             this.data.getMes(),
-             this.data.getDia());
+    public boolean estaVencido(Data dataReferencia) {
+     LocalDate validade = LocalDate.of(this.dataValidade.getAno(),
+             this.dataValidade.getMes(),
+             this.dataValidade.getDia());
 
      LocalDate referencia = LocalDate.of(dataReferencia.getAno(),
              dataReferencia.getMes(),
