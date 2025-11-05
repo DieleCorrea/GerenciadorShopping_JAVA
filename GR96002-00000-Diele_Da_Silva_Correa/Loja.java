@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Loja
 {
     private String nome;
@@ -5,13 +7,18 @@ public class Loja
     private int salarioBaseFuncionario;
     private Endereco endereco;
     private Data dataFundacao;
+    private Produto[] estoqueProdutos;
 
-   public Loja(String nome, int quantidadeFuncionarios, int salarioBaseFuncionario, Endereco endereco, Data dataFundacao) {
+   public Loja(String nome, int quantidadeFuncionarios,
+               int salarioBaseFuncionario,
+               Endereco endereco, Data dataFundacao,int qtdMaxima ) {
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = salarioBaseFuncionario;
         this.endereco = endereco;
         this.dataFundacao = dataFundacao;
+        this.estoqueProdutos = new Produto[qtdMaxima];
+
     }
     public Loja(String nome, int quantidadeFuncionarios){
         this.nome = nome;
@@ -50,18 +57,34 @@ public class Loja
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+    public Produto[] getEstoqueProdutos() {
+        return estoqueProdutos;
+    }
+    public void setEstoqueProdutos(Produto[] estoqueProdutos) {
+        this.estoqueProdutos = estoqueProdutos;
+    }
 
     @Override
     public String toString() {
-        return  " \n- Nome: " + nome +
-                " \n- Quantida de funcionarios: " + quantidadeFuncionarios +
-                " \n- Salário base funcionario: " + salarioBaseFuncionario +
-                " \n- Data criação: " + dataFundacao +
-                " \n- Endereco: " + endereco;
-
+        String infoProdutos = "";
+        if (estoqueProdutos != null) {
+            infoProdutos = "\n- Estoque de produtos (" + estoqueProdutos.length + " espaços):";
+            for (Produto produto : estoqueProdutos) {
+                if (produto != null) {
+                    infoProdutos += "\n   * " + produto;
+                }
+            }
+        }
+        return "Loja{" +
+                "nome='" + nome + '\'' +
+                ", quantidadeFuncionarios=" + quantidadeFuncionarios +
+                ", salarioBaseFuncionario=" + salarioBaseFuncionario +
+                ", endereco=" + endereco +
+                ", dataFundacao=" + dataFundacao +
+                infoProdutos+ '}';
     }
-    //METODOS DOS EXERCICIO
 
+    //METODOS DOS EXERCICIO
     public int gastosComSalario(){
         if(salarioBaseFuncionario != -1){
             return  quantidadeFuncionarios * salarioBaseFuncionario;
@@ -77,5 +100,45 @@ public class Loja
        }else{
            return 'G';
        }
+    }
+    public void imprimeProdutos(){
+       if(estoqueProdutos != null || estoqueProdutos.length == 0 ){
+           System.out.println("Opa, identificado que não existe estoque ou " +
+                   "que a quantidade máxima de produtos para o estoque da loja foi" +
+                   " setada como '0'");
+       }
+       boolean temProduto = false;
+       for(Produto produto : estoqueProdutos){
+           if (produto != null) {
+               System.out.println(produto);
+           temProduto = true;
+           }
+       }
+       if (!temProduto){
+           System.out.println("Estoque vazio");
+       }
+    }
+    public boolean insereProduto(Produto produto){
+        for (int i = 0; i < estoqueProdutos.length ; i++) {
+            if(estoqueProdutos[i] == null){
+                estoqueProdutos[i] = produto;
+                System.out.println("Produto inserido no estoque");
+                return true;
+            }
+        }
+        System.out.println("Estoque cheio");
+        return false;
+    }
+    public boolean removeProduto(String nomeProduto){
+        for (int i = 0; i < estoqueProdutos.length; i++) {
+            Produto produto = estoqueProdutos[1];
+            if (produto != null && produto.getNome().equalsIgnoreCase(nomeProduto)){
+                estoqueProdutos[i] = null;
+                System.out.printf("Produto removido");
+                return true;
+            }
+        }
+        System.out.println("Produto " + nomeProduto + "não encontrado");
+        return false;
     }
 }
