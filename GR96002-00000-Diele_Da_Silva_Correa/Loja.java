@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Loja
 {
     private String nome;
@@ -7,7 +5,7 @@ public class Loja
     private int salarioBaseFuncionario;
     private Endereco endereco;
     private Data dataFundacao;
-    private Produto[] estoqueProdutos;
+    private Produto[] produtos;
 
    public Loja(String nome, int quantidadeFuncionarios,
                int salarioBaseFuncionario,
@@ -17,13 +15,20 @@ public class Loja
         this.salarioBaseFuncionario = salarioBaseFuncionario;
         this.endereco = endereco;
         this.dataFundacao = dataFundacao;
-        this.estoqueProdutos = new Produto[qtdMaxima];
+        this.produtos = new Produto[qtdMaxima];
 
     }
     public Loja(String nome, int quantidadeFuncionarios){
         this.nome = nome;
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = -1;
+    }
+    public Loja(String nome, int quantidadeFuncionarios, Endereco endereco, Data dataFundacao, int salarioBaseFuncionario) {
+        this.nome = nome;
+        this.quantidadeFuncionarios = quantidadeFuncionarios;
+        this.endereco = endereco;
+        this.dataFundacao = dataFundacao;
+        this.salarioBaseFuncionario = salarioBaseFuncionario;
     }
 
 //GETERS E SETER
@@ -57,19 +62,19 @@ public class Loja
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    public Produto[] getEstoqueProdutos() {
-        return estoqueProdutos;
+    public Produto[] getProdutos() {
+        return produtos;
     }
-    public void setEstoqueProdutos(Produto[] estoqueProdutos) {
-        this.estoqueProdutos = estoqueProdutos;
+    public void setProdutos(Produto[] produtos) {
+        this.produtos = produtos;
     }
 
     @Override
     public String toString() {
         String infoProdutos = "";
-        if (estoqueProdutos != null) {
-            infoProdutos = "\n- Estoque de produtos (" + estoqueProdutos.length + " espaços):";
-            for (Produto produto : estoqueProdutos) {
+        if (produtos != null) {
+            infoProdutos = "\n- Estoque de produtos (" + produtos.length + " espaços):";
+            for (Produto produto : produtos) {
                 if (produto != null) {
                     infoProdutos += "\n   * " + produto;
                 }
@@ -102,13 +107,13 @@ public class Loja
        }
     }
     public void imprimeProdutos(){
-       if(estoqueProdutos != null || estoqueProdutos.length == 0 ){
+       if(produtos != null || produtos.length == 0 ){
            System.out.println("Opa, identificado que não existe estoque ou " +
                    "que a quantidade máxima de produtos para o estoque da loja foi" +
                    " setada como '0'");
        }
        boolean temProduto = false;
-       for(Produto produto : estoqueProdutos){
+       for(Produto produto : produtos){
            if (produto != null) {
                System.out.println(produto);
            temProduto = true;
@@ -119,9 +124,9 @@ public class Loja
        }
     }
     public boolean insereProduto(Produto produto){
-        for (int i = 0; i < estoqueProdutos.length ; i++) {
-            if(estoqueProdutos[i] == null){
-                estoqueProdutos[i] = produto;
+        for (int i = 0; i < produtos.length ; i++) {
+            if(produtos[i] == null){
+                produtos[i] = produto;
                 System.out.println("Produto inserido no estoque");
                 return true;
             }
@@ -130,10 +135,10 @@ public class Loja
         return false;
     }
     public boolean removeProduto(String nomeProduto){
-        for (int i = 0; i < estoqueProdutos.length; i++) {
-            Produto produto = estoqueProdutos[1];
+        for (int i = 0; i < produtos.length; i++) {
+            Produto produto = produtos[i];
             if (produto != null && produto.getNome().equalsIgnoreCase(nomeProduto)){
-                estoqueProdutos[i] = null;
+                produtos[i] = null;
                 System.out.printf("Produto removido");
                 return true;
             }

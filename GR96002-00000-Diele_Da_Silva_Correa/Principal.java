@@ -56,6 +56,10 @@ public class Principal {
         System.out.print("Salário base dos funcionarios: ");
         int slrBase = scanner.nextInt();
 
+        System.out.print("Quantidade máxima de produtos no estoque: ");
+        int qtdMaxProduto = scanner.nextInt();
+        scanner.nextLine();
+
         scanner.nextLine();
         System.out.println("\n--- Endereço da loja ---");
         Endereco endereco = criarEnderecoLoja();
@@ -66,7 +70,7 @@ public class Principal {
         int ano = hoje.getYear();
         Data dataFormacao = new Data(dia, mes, ano);
 
-        lojaCriada = new Loja(nomeLoja, qtdFunc, slrBase, endereco, dataFormacao);
+        lojaCriada = new Loja(nomeLoja, qtdFunc, slrBase, endereco, dataFormacao, qtdMaxProduto);
         System.out.println("loja criada com sucesso!\n");
     }
 
