@@ -28,7 +28,8 @@ public class Loja
         this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.endereco = endereco;
         this.dataFundacao = dataFundacao;
-        this.salarioBaseFuncionario = salarioBaseFuncionario;
+        this.salarioBaseFuncionario = -1;
+        this.produtos = new Produto[5];
     }
 
 //GETERS E SETER
@@ -38,9 +39,6 @@ public class Loja
     public int getQuantidadeFuncionarios() {
         return quantidadeFuncionarios;
     }
-    public int getSalarioBaseFuncionario() {
-        return salarioBaseFuncionario;
-    }
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -49,6 +47,9 @@ public class Loja
     }
     public void setSalarioBaseFuncionario(int salarioBaseFuncionario) {
         this.salarioBaseFuncionario = salarioBaseFuncionario;
+    }
+    public int getSalarioBaseFuncionario() {
+        return salarioBaseFuncionario;
     }
     public Data getDataFundacao() {
         return dataFundacao;
@@ -98,8 +99,8 @@ public class Loja
         }
     }
     public char tamanhoDaLoja(){
-       if(quantidadeFuncionarios > 10) {
-       return 'p';
+       if(quantidadeFuncionarios < 10) {
+       return 'P';
        }else if (quantidadeFuncionarios >= 10 && quantidadeFuncionarios <= 30){
            return 'M';
        }else{
@@ -107,20 +108,12 @@ public class Loja
        }
     }
     public void imprimeProdutos(){
-       if(produtos != null || produtos.length == 0 ){
-           System.out.println("Opa, identificado que não existe estoque ou " +
-                   "que a quantidade máxima de produtos para o estoque da loja foi" +
-                   " setada como '0'");
-       }
        boolean temProduto = false;
        for(Produto produto : produtos){
            if (produto != null) {
                System.out.println(produto);
            temProduto = true;
            }
-       }
-       if (!temProduto){
-           System.out.println("Estoque vazio");
        }
     }
     public boolean insereProduto(Produto produto){
