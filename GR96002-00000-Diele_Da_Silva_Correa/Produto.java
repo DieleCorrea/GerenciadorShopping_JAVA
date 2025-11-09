@@ -32,12 +32,10 @@ public class Produto {
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "nome='" + nome + '\'' +
-                ", preco=" + preco +
-                ", data=" + dataValidade +
-                '}';
+        String vencimento = Loja.produtoCriado.estaVencido(dataValidade) ? "-> PRODUTUDO VENCIDO" : "-> PRODUTO NÃO VENCIDO";;
+        return "📦 Produto: " + nome + " | 💵 Preço: R$ " + preco + " | 📅 Validade: " + dataValidade + vencimento;
     }
+
 
     public boolean estaVencido(Data dataReferencia) {
      LocalDate validade = LocalDate.of(this.dataValidade.getAno(),
@@ -50,13 +48,4 @@ public class Produto {
 
      return validade.isBefore(referencia);
  }
-
-//    public boolean estaVencido(Data dataProduto) {
-//        LocalDate vencimento = LocalDate.of(dataProduto.getAno(), dataProduto.getMes(), dataProduto.getDia());
-//        if (vencimento.isBefore(LocalDate.now())) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 }

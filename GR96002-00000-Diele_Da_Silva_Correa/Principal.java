@@ -2,12 +2,12 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Principal {
-    private static final Scanner scanner = new Scanner(System.in);
-    public static Loja lojaCriada;
-    public static Produto produtoCriado;
+   private static final Scanner scanner = new Scanner(System.in);
+
     private static  int opt;
     public static void main(String[] args) {
         mostraMenu();
+//        testeShopping();
         scanner.close();
     }
 
@@ -16,109 +16,92 @@ public class Principal {
             System.out.println("---GERENCIAR O SHOPPING---");
             System.out.println("1- Criar uma loja");
             System.out.println("2- Criar um produto");
+            System.out.println("3- Mostrar loja criada e produtos pertencentes");
             System.out.println("3- SAIR");
             opt = scanner.nextInt();
 
             switch (opt) {
                 case 1:
-                    criarLoja();
+                    Loja.criarLoja();
                     break;
                 case 2:
-                    criarProduto();
+                    Loja.criarProduto();
                     break;
                 case 3:
+                    Loja.mostrarDadosLoja();
+                    break;
+                case 4:
                     System.out.println("Volte sempre!\n");
                     break;
                 default:
                     System.out.println("Opção inválida!\n");
             }
-            if(lojaCriada != null && produtoCriado != null){
-                Data dataTeste = new Data(20,10,2023);
-                if (produtoCriado.estaVencido(dataTeste)){
-                    System.out.println("PRODUTO VENCIDO");
-                }else{
-                    System.out.println("PRODUTO NÃO VENCIDO");
-                }
-                System.out.println("Informações da loja criada: " + lojaCriada.toString() + "\n");
-            }
-        } while (opt != 3);
+
+        } while (opt != 4);
     }
 
-    private static void criarLoja() {
-        scanner.nextLine();
-        System.out.print("Nome da loja: ");
-        String nomeLoja = scanner.nextLine();
+    public static void testeShopping() {
+        //Criar o endereço do shopping
+        Endereco enderecoShopping = new Endereco(
+                "Av. Central", "Porto Alegre", "RS",
+                "Brasil", "90560-000", "1000", "Próximo ao parque"
+        );
 
-        System.out.print("Quantidade de funcionários: ");
-        int qtdFunc = scanner.nextInt();
-        scanner.nextLine();
+        //Criar o shopping com capacidade para 5 lojas
+        Shopping shopping = new Shopping("Shopping das Estrelas", enderecoShopping, 5);
 
-        System.out.print("Salário base dos funcionarios: ");
-        int slrBase = scanner.nextInt();
+        //Criar datas para fundação e alvarás
+        Data dataFundacao1 = new Data(1, 2, 2020);
+        Data dataFundacao2 = new Data(15, 3, 2019);
+        Data dataFundacao3 = new Data(10, 8, 2021);
+        Data dataFundacao4 = new Data(25, 12, 2022);
+        Data dataAlvara = new Data(20, 8, 2021);
 
-        System.out.print("Quantidade máxima de produtos no estoque: ");
-        int qtdMaxProduto = scanner.nextInt();
-        scanner.nextLine();
+        //Criar lojas de tipos diferentes (usando os construtores reais)
+        Loja loja1 = new Informatica("TechMaster", 10, 3000, enderecoShopping, dataFundacao1, 15000.0, 20);
+        Loja loja2 = new Vestuario("FashionUp", 5, 2500, enderecoShopping, dataFundacao2, true, 15);
+        Loja loja3 = new Alimentacao("Delícia Express", 8, 2200, enderecoShopping, dataFundacao3, dataAlvara, 10);
+        Loja loja4 = new Cosmetico("Beleza Pura", 6, 2800, enderecoShopping, dataFundacao4, 50.0, 12);
+        Loja loja5 = new Cosmetico("Diele cosmeticos", 2, 5000, enderecoShopping, dataFundacao4, 50.0, 12);
 
-        scanner.nextLine();
-        System.out.println("\n--- Endereço da loja ---");
-        Endereco endereco = criarEnderecoLoja();
+        //Inserir lojas no shopping
+        shopping.insereLoja(loja1);
+        shopping.insereLoja(loja2);
+        shopping.insereLoja(loja3);
+        shopping.insereLoja(loja4);
+        shopping.insereLoja(loja5);
 
-        LocalDate hoje = LocalDate.now();
-        int dia = hoje.getDayOfMonth();
-        int mes = hoje.getMonthValue();
-        int ano = hoje.getYear();
-        Data dataFormacao = new Data(dia, mes, ano);
+        //Mostrar informações gerais do shopping
+        System.out.println("=== INFORMAÇÕES DO SHOPPING ===");
+        System.out.println(shopping);
 
-        lojaCriada = new Loja(nomeLoja, qtdFunc, slrBase, endereco, dataFormacao, qtdMaxProduto);
-        System.out.println("loja criada com sucesso!\n");
+        //Testar método quantidadeLojasPorTipo
+        System.out.println("\n=== QUANTIDADE DE LOJAS POR TIPO ===");
+        System.out.println("Informática: " + shopping.quantidadeLojasPorTipo("Informatica"));
+        System.out.println("Vestuário: " + shopping.quantidadeLojasPorTipo("Vestuario"));
+        System.out.println("Alimentação: " + shopping.quantidadeLojasPorTipo("Alimentacao"));
+        System.out.println("Cosmético: " + shopping.quantidadeLojasPorTipo("Cosmetico"));
+
+        //Testar método lojaSeguroMaisCaro
+        System.out.println("\n=== LOJA COM SEGURO MAIS CARO ===");
+        Informatica lojaMaisCara = shopping.lojaSeguroMaisCaro();
+        if (lojaMaisCara != null) {
+            System.out.println("Loja: " + lojaMaisCara.getNome() +
+                    " | Seguro: R$ " + lojaMaisCara.getSeguroEletronicos());
+        } else {
+            System.out.println("Nenhuma loja de informática encontrada.");
+        }
+
+        // Testar remoção de loja
+        System.out.println("\n=== REMOVENDO LOJA 'FashionUp' ===");
+        boolean removida = shopping.removeLoja("FashionUp");
+        System.out.println(removida ? "Loja removida com sucesso!" : "Não foi possível remover a loja.");
+
+        // Mostrar lista de lojas restantes
+//        System.out.println("\nLojas restantes: " + Arrays.toString(shopping.getLojas()));
+        System.out.println("\nDados shopping com lojas restantes\n" + shopping);
     }
 
-    private static void criarProduto(){
-        scanner.nextLine();
-        System.out.print("Nome do produto: ");
-        String nomeProduto = scanner.nextLine();
-
-        System.out.print("Preço do produto: ");
-        double precoProduto = scanner.nextDouble();
-        scanner.nextLine();
-
-        System.out.print("Validade (dd/mm/aaaa): ");
-        String validade = scanner.nextLine();
-        String[] partes = validade.split("/");
-        int dia = Integer.parseInt(partes[0]);
-        int mes = Integer.parseInt(partes[1]);
-        int ano = Integer.parseInt(partes[2]);
-
-        Data dataValidade = new Data(dia, mes, ano);
-        produtoCriado = new Produto(nomeProduto, precoProduto,dataValidade);
-        System.out.println("Produto criado com sucesso!\n");
-    }
-
-    private static Endereco criarEnderecoLoja(){
-        System.out.print("Nome da rua: ");
-        String rua = scanner.nextLine();
-
-        System.out.print("Número: ");
-        String numero = scanner.nextLine();
-
-        System.out.print("Complemento: ");
-        String complemento = scanner.nextLine();
-
-        System.out.print("Cidade: ");
-        String cidade = scanner.nextLine();
-
-        System.out.print("Estado: ");
-        String estado = scanner.nextLine();
-
-        System.out.print("País: ");
-        String pais = scanner.nextLine();
-
-        System.out.print("CEP: ");
-        String cep = scanner.nextLine();
-
-        return  new Endereco(rua, cidade, estado, pais, cep, numero, complemento);
-    }
 
 }
 

@@ -35,12 +35,28 @@ public class Shopping {
 
     @Override
     public String toString() {
-        return "Shopping: " + nome +
-                "\nEndereço: " + endereco +
-                "\nLojas: " + Arrays.toString(lojas);
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== Shopping ===\n");
+        sb.append("Nome: ").append(nome).append("\n");
+        sb.append("Endereço: ").append(endereco).append("\n");
+
+        sb.append("Lojas:\n");
+        if (lojas == null || lojas.length == 0) {
+            sb.append("  Nenhuma loja cadastrada.\n");
+        } else {
+            for (Loja loja : lojas) {
+                if (loja != null) {
+                    sb.append("  - ").append(loja.getNome()).append("\n");
+                }
+            }
+        }
+
+        return sb.toString();
     }
-//METODOS DO EXERCICIO
+
+    //METODOS DO EXERCICIO
     public boolean insereLoja(Loja loja){
+
         for (int i = 0; i < lojas.length; i++) {
             if (lojas[i] == null){
                 lojas[i] = loja;

@@ -5,6 +5,10 @@ public class Informatica  extends Loja{
         super(nome, quantidadeFuncionarios, salarioBaseFuncionario, endereco, dataFundacao,qtdMaxProdutos);
         this.seguroEletronicos = seguroEletronicos;
     }
+    public Informatica(String nome, int quantidadeFuncionarios, double seguroEletronicos) {
+        super(nome, quantidadeFuncionarios);
+        this.seguroEletronicos = seguroEletronicos;
+    }
 
     @Override
     public String toString() {
@@ -14,15 +18,8 @@ public class Informatica  extends Loja{
     public double getSeguroEletronicos() {
         return seguroEletronicos;
     }
-
     public void setSeguroEletronicos(double seguroEletronicos) {
         this.seguroEletronicos = seguroEletronicos;
     }
 
-    public Informatica(String nome, int quantidadeFuncionarios, double seguroEletronicos) {
-        super(nome, quantidadeFuncionarios);
-        this.seguroEletronicos = seguroEletronicos;
-
-
-    }
 }

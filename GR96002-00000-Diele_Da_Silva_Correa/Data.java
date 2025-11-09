@@ -32,7 +32,6 @@ public class Data {
         int diasNoMes = obterDiasNoMes(mes, ano);
         return dia <= diasNoMes;
     }
-
     private int obterDiasNoMes(int mes, int ano) {
         switch (mes) {
             case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -46,11 +45,9 @@ public class Data {
                 return 0;
         }
     }
-
     public boolean verificaAnoBissexto() {
         return verificaAnoBissexto(this.ano);
     }
-
     private boolean verificaAnoBissexto(int ano) {
         return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
     }
@@ -64,23 +61,18 @@ public class Data {
     public int getDia() {
         return dia;
     }
-
     public void setDia(int dia) {
         this.dia = dia;
     }
-
     public int getMes() {
         return mes;
     }
-
     public void setMes(int mes) {
         this.mes = mes;
     }
-
     public int getAno() {
         return ano;
     }
-
     public void setAno(int ano) {
         this.ano = ano;
     }
